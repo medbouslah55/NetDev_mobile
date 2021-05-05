@@ -7,9 +7,12 @@ package com.mycompany.myapp.gui.Reclamation;
 
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.Reclamation;
 import com.mycompany.myapp.services.ServiceReclamation;
@@ -23,7 +26,7 @@ public class ListedesreclamationsForm extends Form {
 
     ArrayList<Reclamation> data = new ArrayList<>();
     Container all = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-    
+
     public void listedesreclamations() {
         data = ServiceReclamation.getInstance().getAllReclamation();
         System.out.println(data);
@@ -49,10 +52,16 @@ public class ListedesreclamationsForm extends Form {
             Label etat = new Label("Etat : " + data.get(i).getEtat_rec());
             Button valider = new Button(FontImage.MATERIAL_UPDATE);
             Button supp = new Button(FontImage.MATERIAL_DELETE);
-            x.addAll(nom,prenom,mail,type,etat);
-            xx.addAll(valider,supp);
-            all.addAll(x,date,description,xx,separation);
-           
+            x.addAll(nom, prenom, mail, type, etat);
+            xx.addAll(valider, supp);
+            all.addAll(x, date, description, xx, separation);
+            
+            supp.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    ServiceReclamation.getInstance().deleteReclamation(ab);
+                    Dialog.show("Success", "Memory Deleted Successfully.", "OK", "Cancel");
+                }
+            });
         }
 
     }
@@ -61,9 +70,16 @@ public class ListedesreclamationsForm extends Form {
         setTitle("Listes  Des Reclamations");
         listedesreclamations();
         addAll(all);
-        
-        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK
-                , e-> previous.showBack());
+        getContentPane().addPullToRefresh(new Runnable() {
+                        @Override
+                        public void run() {
+                            
+                            listedesreclamations();
+                            //addAll(all);
+                        }
+                    });
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK,
+                 e -> previous.showBack());
     }
 
 }
