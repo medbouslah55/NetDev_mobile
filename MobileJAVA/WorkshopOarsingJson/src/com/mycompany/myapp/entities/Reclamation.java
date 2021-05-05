@@ -7,6 +7,12 @@ package com.mycompany.myapp.entities;
 
 import java.util.Date;
 
+
+
+
+
+
+
 /**
  *
  * @author Firas
@@ -22,6 +28,15 @@ public class Reclamation {
     private String Etat_rec;
 
     public Reclamation() {
+    }
+
+    public Reclamation(String Nom_rec, String Prenom_rec, String Email_rec, String Type_rec, String Description_rec, String Etat_rec) {
+        this.Nom_rec = Nom_rec;
+        this.Prenom_rec = Prenom_rec;
+        this.Email_rec = Email_rec;
+        this.Type_rec = Type_rec;
+        this.Description_rec = Description_rec;
+        this.Etat_rec = Etat_rec;
     }
 
     public Reclamation(int Id_rec, String Nom_rec, String Prenom_rec, String Email_rec, String Type_rec, Date Date_rec, String Description_rec, String Etat_rec) {

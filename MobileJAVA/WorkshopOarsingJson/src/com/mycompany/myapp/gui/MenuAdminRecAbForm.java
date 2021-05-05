@@ -11,6 +11,7 @@ import com.mycompany.myapp.gui.Abonnement.ajouterAbonnementForm;
 import com.codename1.ui.Button;
 import com.codename1.ui.Form;
 import com.codename1.ui.layouts.BoxLayout;
+import com.mycompany.myapp.gui.Reclamation.ListedesreclamationsForm;
 
 /**
  *
@@ -29,6 +30,7 @@ public class MenuAdminRecAbForm extends Form{
         Button addAb = new Button("Ajouter nouveau type d'abonnements");
 
         allAb.addActionListener(e -> new ListedesabonnementsForm(current).show());
+        allRec.addActionListener(e -> new ListedesreclamationsForm(current).show());
         addAb.addActionListener(e -> new ajouterAbonnementForm(current).show());
         Stat.addActionListener(e -> new StatistiquesForm(current).show());
         addAll(allRec,allAb,Stat,addAb);
