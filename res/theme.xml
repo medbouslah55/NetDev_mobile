@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+        <font key="Test.font" type="ttf" face="0" style="0" size="0" name="native:ItalicLight" family="native:ItalicLight" sizeSettings="3" actualSize="3.5" />
+        <font key="font" type="ttf" face="0" style="0" size="0" name="native:ItalicThin" family="native:ItalicThin" sizeSettings="1" actualSize="12.0" />
+    </theme>
+</resource>
