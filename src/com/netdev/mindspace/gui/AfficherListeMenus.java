@@ -38,6 +38,7 @@ public class AfficherListeMenus extends Form {
     public AfficherListeMenus(Form previous, int id_regime) {        
         current = this;
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_PIE_CHART, e-> new PieChart(current).show());
         getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_SEARCH, e-> new SearchMenuForm(current).show());
         getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_SETTINGS, e-> new SettingsForm(current).show());
         

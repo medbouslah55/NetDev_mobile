@@ -10,11 +10,9 @@ import com.codename1.charts.models.CategorySeries;
 import com.codename1.charts.renderers.DefaultRenderer;
 import com.codename1.charts.renderers.SimpleSeriesRenderer;
 import com.codename1.charts.util.ColorUtil;
-import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.GridLayout;
 import com.netdev.mindspace.entites.Menu;
 import com.netdev.mindspace.services.MenuServices;
 
@@ -36,10 +34,13 @@ public class PieChart extends Form {
      * Creates a renderer for the specified colors.
      *
      */
-    public PieChart() {;
+    public PieChart(Form previous) {
         current = this;
         t = createPieChartForm();
         add(t);
+        
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
+        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_SETTINGS, e-> new SettingsForm(current).show());
     }
 
     /**
@@ -102,13 +103,13 @@ public class PieChart extends Form {
         r.setHighlighted(true);
 
         // Create the chart ... pass the values and renderer to the chart object.
-        com.codename1.charts.views.PieChart chart = new com.codename1.charts.views.PieChart(buildCategoryDataset("Project budget", values), renderer);
+        com.codename1.charts.views.PieChart chart = new com.codename1.charts.views.PieChart(buildCategoryDataset("Statistique Calorique", values), renderer);
 
         // Wrap the chart in a Component so we can add it to a form
         ChartComponent c = new ChartComponent(chart);
 
         // Create a form and show it.
-        Form f = new Form("Budget", new BorderLayout());
+        Form f = new Form("Statistique Calorique", new BorderLayout());
         f.add(BorderLayout.CENTER, c);
         return f;
 

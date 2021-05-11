@@ -56,7 +56,7 @@ public class MyApplication {
             current.show();
             return;
         }
-        new PieChart().show();
+        new AfficherListRegime(current).show();
         
         this.m = null;
         try {
