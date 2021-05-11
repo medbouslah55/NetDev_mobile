@@ -25,7 +25,6 @@ public class MyApplication {
 
     public static Form current;
     public static Resources theme;
-    public static Media m;
 
     public void init(Object context) {
         // use two network threads instead of one
@@ -57,17 +56,6 @@ public class MyApplication {
         }
         new AfficherListRegime(current).show();
         
-        this.m = null;
-        try {
-//            m = MediaManager.createMedia("http://www.votresite.com/sintel_trailer.mp4", true);
-            m = MediaManager.createMedia("file://C:\\Users\\trabe\\Desktop\\Pidev_mobile\\audio\\2.mp3", false);
-            if (m != null) {
-                m.play();
-            }
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 
     public void stop() {
