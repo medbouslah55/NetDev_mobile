@@ -160,4 +160,64 @@ public class MenuServices {
         return msearch;
     }
     
+    public Menu getHigh(){
+        String url = Statics.BASE_URL + "/api/regimes/menus/stat_high";
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                try {
+                    m = parseOneMenu(new String(req.getResponseData()));
+                    req.removeResponseListener(this);
+                } catch (ParseException ex) {
+                   
+                }
+                
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return m;
+    }
+    
+    public Menu getLow(){
+        String url = Statics.BASE_URL + "/api/regimes/menus/stat_low";
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                try {
+                    m = parseOneMenu(new String(req.getResponseData()));
+                    req.removeResponseListener(this);
+                } catch (ParseException ex) {
+                   
+                }
+                
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return m;
+    }
+    
+    public Menu getAvrage (){
+        String url = Statics.BASE_URL + "/api/regimes/menus/stat_avrage";
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                try {
+                    m = parseOneMenu(new String(req.getResponseData()));
+                    req.removeResponseListener(this);
+                } catch (ParseException ex) {
+                   
+                }
+                
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return m;
+    }
+    
 }

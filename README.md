@@ -1,1 +1,0 @@
-# NetDev_mobile
