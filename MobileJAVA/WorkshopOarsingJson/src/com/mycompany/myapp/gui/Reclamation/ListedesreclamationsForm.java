@@ -18,6 +18,7 @@ import com.mycompany.myapp.entities.Reclamation;
 import com.mycompany.myapp.services.ServiceReclamation;
 import java.util.ArrayList;
 
+
 /**
  *
  * @author Firas
@@ -56,6 +57,12 @@ public class ListedesreclamationsForm extends Form {
             xx.addAll(valider, supp);
             all.addAll(x, date, description, xx, separation);
             
+            valider.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    
+                    Dialog.show("Success", "Memory Deleted Successfully.", "OK", "Cancel");
+                }
+            });
             supp.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     ServiceReclamation.getInstance().deleteReclamation(ab);
@@ -63,21 +70,21 @@ public class ListedesreclamationsForm extends Form {
                 }
             });
         }
-
+        addAll(all);
     }
 
     public ListedesreclamationsForm(Form previous) {
         setTitle("Listes  Des Reclamations");
         listedesreclamations();
-        addAll(all);
-        getContentPane().addPullToRefresh(new Runnable() {
-                        @Override
-                        public void run() {
-                            
-                            listedesreclamations();
-                            //addAll(all);
-                        }
-                    });
+        //addAll(all);
+//        getContentPane().addPullToRefresh(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            all.removeAll();
+//                            listedesreclamations();
+//                            
+//                        }
+//                    });
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK,
                  e -> previous.showBack());
     }
