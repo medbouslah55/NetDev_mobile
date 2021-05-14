@@ -30,8 +30,6 @@ ArrayList<Abonnement> datatrier = new ArrayList<>();
 Container all = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 Container tri = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 
-
-
  
  private void listeab(){
     data = ServiceAbonnement.getInstance().getAllabonnements();
@@ -65,21 +63,13 @@ Container tri = new Container(new BoxLayout(BoxLayout.Y_AXIS));
     }
 
         addAll(all);
-    
+  
  }
 public ListedesabonnementsForm(Form previous) {
     
     setTitle("Listes  Des Abonnements");
-    Button refresh = new Button("Actualiser");
-
-    
-    
-    
-    addAll(refresh);
     listeab();
     getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK
                 , e-> previous.showBack());
-    
- 
 }
 }

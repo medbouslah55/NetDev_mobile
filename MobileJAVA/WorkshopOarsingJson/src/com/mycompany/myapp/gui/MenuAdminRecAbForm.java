@@ -12,6 +12,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Form;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.gui.Reclamation.ListedesreclamationsForm;
+import com.mycompany.myapp.gui.Reclamation.ajouterReclamationForm;
 
 /**
  *
@@ -28,12 +29,14 @@ public class MenuAdminRecAbForm extends Form{
         Button allAb = new Button("Liste des abonnements");
         Button Stat = new Button("Statistiques");
         Button addAb = new Button("Ajouter nouveau type d'abonnements");
+        Button addRec = new Button("Passer Une Réclamation");
 
+        addRec.addActionListener(e -> new ajouterReclamationForm(current).show());
         allAb.addActionListener(e -> new ListedesabonnementsForm(current).show());
         allRec.addActionListener(e -> new ListedesreclamationsForm(current).show());
         addAb.addActionListener(e -> new ajouterAbonnementForm(current).show());
         Stat.addActionListener(e -> new StatistiquesForm(current).show());
-        addAll(allRec,allAb,Stat,addAb);
+        addAll(allRec,allAb,Stat,addAb,addRec);
 
     }
     

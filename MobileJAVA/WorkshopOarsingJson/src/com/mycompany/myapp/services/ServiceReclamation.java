@@ -46,7 +46,7 @@ public class ServiceReclamation {
     }
 
     public boolean addReclamation(Reclamation t) {
-        String url = Statics.BASE_URL + "/reclamation/addReclamation?" + "nom=" + t.getNom_rec() + "&prenom=" + t.getPrenom_rec() + "&mail=" + t.getEmail_rec() + "type=" + t.getType_rec() + "&description=" + t.getDescription_rec();
+        String url = Statics.BASE_URL + "/reclamation/addReclamation?" + "nom=" + t.getNom_rec() + "&prenom=" + t.getPrenom_rec() + "&mail=" + t.getEmail_rec() + "&type=" + t.getType_rec() + "&description=" + t.getDescription_rec();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -60,7 +60,7 @@ public class ServiceReclamation {
     }
 
     public boolean updateReclamation(Reclamation t) {
-        String url = Statics.BASE_URL + "/reclamation/updateReclamation/" + t.getId_rec() + "?" + "nom=" + t.getNom_rec() + "&prenom=" + t.getPrenom_rec() + "&mail=" + t.getEmail_rec() + "type=" + t.getType_rec() + "&description=" + t.getDescription_rec();
+        String url = Statics.BASE_URL + "/reclamation/updateReclamation/" + t.getId_rec() + "?" + "nom=" + t.getNom_rec() + "&prenom=" + t.getPrenom_rec() + "&mail=" + t.getEmail_rec() + "&type=" + t.getType_rec() + "&description=" + t.getDescription_rec();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -134,6 +134,20 @@ public class ServiceReclamation {
             System.out.println(ex.getMessage());
         }
          return reclamations;
+    }
+    
+    public boolean ChangerEtatReclamation(Reclamation t) {
+        String url = Statics.BASE_URL + "/reclamation/updateReclamation/" + t.getId_rec() + "?" + "nom=" + t.getNom_rec() + "&prenom=" + t.getPrenom_rec() + "&mail=" + t.getEmail_rec() + "&type=" + t.getType_rec()+"&etat=" +t.getEtat_rec()+ "&description=" + t.getDescription_rec();
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200;
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
     }
 }
 

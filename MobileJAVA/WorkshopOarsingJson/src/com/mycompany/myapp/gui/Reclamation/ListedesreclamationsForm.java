@@ -18,7 +18,6 @@ import com.mycompany.myapp.entities.Reclamation;
 import com.mycompany.myapp.services.ServiceReclamation;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author Firas
@@ -45,46 +44,34 @@ public class ListedesreclamationsForm extends Form {
             Label separation = new Label("----------------------------");
             Label nom = new Label("Nom : " + data.get(i).getNom_rec());
             Label prenom = new Label("Prenom : " + data.get(i).getPrenom_rec());
-            Label mail = new Label("Emial : " + data.get(i).getEmail_rec());
+            Label mail = new Label("E-mail : " + data.get(i).getEmail_rec());
             Label type = new Label("Type : " + data.get(i).getType_rec());
             String d1 = data.get(i).getDate_rec().toString().substring(0, 10);
             Label date = new Label("Date : " + d1);
             Label description = new Label("Description : " + data.get(i).getDescription_rec());
             Label etat = new Label("Etat : " + data.get(i).getEtat_rec());
-            Button valider = new Button(FontImage.MATERIAL_UPDATE);
+            Button modif = new Button(FontImage.MATERIAL_UPDATE);
             Button supp = new Button(FontImage.MATERIAL_DELETE);
-            x.addAll(nom, prenom, mail, type, etat);
-            xx.addAll(valider, supp);
-            all.addAll(x, date, description, xx, separation);
-            
-            valider.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    
-                    Dialog.show("Success", "Memory Deleted Successfully.", "OK", "Cancel");
-                }
-            });
+            x.addAll(nom, prenom);
+            xx.addAll(modif, supp);
+            all.addAll(x, mail, type, description, date, etat, xx, separation);
+            modif.addActionListener(e -> new modifierReclamationForm(ab).show());
             supp.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent evt) {
                     ServiceReclamation.getInstance().deleteReclamation(ab);
                     Dialog.show("Success", "Memory Deleted Successfully.", "OK", "Cancel");
                 }
             });
         }
-        addAll(all);
+
     }
 
     public ListedesreclamationsForm(Form previous) {
         setTitle("Listes  Des Reclamations");
         listedesreclamations();
-        //addAll(all);
-//        getContentPane().addPullToRefresh(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            all.removeAll();
-//                            listedesreclamations();
-//                            
-//                        }
-//                    });
+        addAll(all);
+
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK,
                  e -> previous.showBack());
     }

@@ -71,37 +71,5 @@ public class ajouterAbonnementForm extends Form {
         m.setMimeType(Message.MIME_HTML);
         boolean success = m.sendMessageViaCloudSync("fg7@students.kiron.ngo","firasgacha8@gmail.com", "firas", "Message Subject","Check out Codename One at https://www.codenameone.com/");
     }
-//    private void sendMail() throws AddressException, MessagingException {
-//        String to = "firasgacha8@gmail.com";
-//        String from = "fg7@students.kiron.ngo";
-//        String host = "smtp.gmail.com";
-//        final String username = "fg7@students.kiron.ngo";
-//        final String password = "f*i*r*a*s*1*3*0*2*9*8";
-//        ////SETUP SERVER
-//
-//        Properties props = System.getProperties();
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.starttls.enable", "true");
-//        props.put("mail.smtp.host", host);
-//        props.put("mail.smtp.port", "587");
-//        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-//
-//        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-//            @Override
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(username, password);
-//            }
-//        });
-//        //create mail
-//        MimeMessage m = new MimeMessage(session);
-//        m.setFrom(new InternetAddress(from));
-//        m.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
-//        m.setSubject("MindSpace : Confirmation Réclamation");
-//        m.setText("Votre abonnement a été modifier avec succès !"
-//        );
-//
-//        //send mail
-//        Transport.send(m);
-//
-//    }
+
 }
