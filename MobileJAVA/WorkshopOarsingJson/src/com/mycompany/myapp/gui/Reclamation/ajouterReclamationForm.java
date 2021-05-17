@@ -35,7 +35,7 @@ public class ajouterReclamationForm extends Form {
         TextField tfprenom = new TextField("", "Prénom");
         TextField tfmail = new TextField("", "E-mail");
         
-        ComboBox tftype = new ComboBox("Type de probléme", "Problème technique", "Problème de connexion", "Problème au niveau de payemant", "Problème au niveau de réservation");
+        ComboBox tftype = new ComboBox("Type De Probléme","Probleme technique", "Probleme de connexion", "Probleme Au Niveau De Payemant", "Probleme Au Niveau De Reservation");
         //TextField tftype = new TextField("", "Type");
         TextField tfdescription = new TextField("", "Description");
         Button btnValidee = new Button("Enregistrer");
