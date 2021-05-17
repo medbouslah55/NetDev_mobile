@@ -6,17 +6,24 @@
 package com.netdev.mindspace.gui;
 
 import com.codename1.components.ImageViewer;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.list.DefaultListModel;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.util.Resources;
+import com.codename1.uikit.cleanmodern.BaseForm;
 import com.netdev.mindspace.entites.Menu;
 import com.netdev.mindspace.services.MenuServices;
 import java.io.IOException;
@@ -25,7 +32,7 @@ import java.io.IOException;
  *
  * @author trabe
  */
-public class AfficherMenuSolo extends Form {
+public class AfficherMenuSolo extends BaseForm {
     Form current;
     Image img1 = null;
     Image img2 = null;
@@ -33,11 +40,28 @@ public class AfficherMenuSolo extends Form {
     ImageViewer iv = null;
     EncodedImage ec;
 
-    public AfficherMenuSolo(Form previous, int idRegime, int idMenu) {
-        current = this;
+    public AfficherMenuSolo(Resources res, int idRegime, int idMenu) {
+        super("Recherche", BoxLayout.y());
+        Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        setTitle("Recherche");
+        getContentPane().setScrollVisible(false);
         
-        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
-        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_SETTINGS, e-> new SettingsForm(current).show());
+        super.addSideMenu(res);
+        
+        Image img = res.getImage("profile-background.jpg");
+        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 12) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 12);
+        }
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        
+        add(LayeredLayout.encloseIn(
+                sl
+        ));
+        
+        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_SETTINGS, e-> new SettingsForm(res).show());
         
         Menu p = MenuServices.getInstance().getSingleMenu(idRegime, idMenu);
         
@@ -76,7 +100,7 @@ public class AfficherMenuSolo extends Form {
             lbCalories.getAllStyles().setFgColor(0x00b300);
             
             Container cnNbj = FlowLayout.encloseCenter(lbNbj);
-            Container img = FlowLayout.encloseCenter(iv);
+            Container imgg = FlowLayout.encloseCenter(iv);
             Container cnMatin = FlowLayout.encloseCenter(lbMatin);
             Container cnDej = FlowLayout.encloseCenter(lbDej);
             Container cnDinner = FlowLayout.encloseCenter(lbDinner);
@@ -94,7 +118,7 @@ public class AfficherMenuSolo extends Form {
             cnCal.getAllStyles().setMarginTop(100);
             
             cnVer.add(cnNbj);
-            cnVer.add(img);
+            cnVer.add(imgg);
             cnVer.add(cnMatin);
             cnVer.add(cnDej);
             cnVer.add(cnDinner);

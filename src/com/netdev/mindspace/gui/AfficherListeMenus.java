@@ -6,18 +6,27 @@
 package com.netdev.mindspace.gui;
 
 import com.codename1.components.ImageViewer;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.list.DefaultListModel;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.util.Resources;
+import com.codename1.uikit.cleanmodern.BaseForm;
 import com.netdev.mindspace.entites.Menu;
 import com.netdev.mindspace.services.MenuServices;
 import java.io.IOException;
@@ -27,7 +36,7 @@ import java.util.ArrayList;
  *
  * @author trabe
  */
-public class AfficherListeMenus extends Form {
+public class AfficherListeMenus extends BaseForm {
     Form current;
     Image img1 = null;
     Image img2 = null;
@@ -35,15 +44,32 @@ public class AfficherListeMenus extends Form {
     ImageViewer iv = null;
     EncodedImage ec;
     
-    public AfficherListeMenus(Form previous, int id_regime) {        
-        current = this;
-        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
-        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_PIE_CHART, e-> new PieChart(current).show());
-        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_SEARCH, e-> new SearchMenuForm(current).show());
-        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_SETTINGS, e-> new SettingsForm(current).show());
+    public AfficherListeMenus(Resources res, int id_regime) {        
+        super("Nos Menus", BoxLayout.y());
+        Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        setTitle("Nos Menus");
+        getContentPane().setScrollVisible(false);
         
-        current.setTitle("Nos Menus");
+        super.addSideMenu(res);
         
+        Image img = res.getImage("profile-background.jpg");
+        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 12) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 12);
+        }
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        
+        add(LayeredLayout.encloseIn(
+                sl
+        ));
+        
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_PIE_CHART, e-> new PieChart(res).show());
+        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_SEARCH, e-> new SearchMenuForm(res).show());
+        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_SETTINGS, e-> new SettingsForm(res).show());
+//        getToolbar().addCommandToOverflowMenu("Settings", null ,  e-> new SettingsForm(current).show());
+                
         ArrayList<Menu> pd = MenuServices.getInstance().getAllMenus(id_regime);
         for(Menu p : pd){
 //            Container cnHor = new Container(BoxLayout.x());
@@ -73,14 +99,14 @@ public class AfficherListeMenus extends Form {
                 );
                 
                 Button voirMenu = new Button("More details...");
-                voirMenu.getAllStyles().setFgColor(0xffbe5aff);
+                voirMenu.getAllStyles().setFgColor(0xfffffff);
                 
                 FontImage.setMaterialIcon(voirMenu, FontImage.MATERIAL_RESTAURANT_MENU, 4);
                 
                 voirMenu.addActionListener(e -> {
 //                    Dialog.show("Confirmation", "Vous êtes sur de consulter le Menu "+ p.getDescription(), new Command("Oui"));
                     int idMenu = (int)Float.parseFloat(p.getIdMenu());
-                    new AfficherMenuSolo(current, id_regime, idMenu).show();
+                    new AfficherMenuSolo(res, id_regime, idMenu).show();
                 });
                 
                 cnVer.add(welcome);
