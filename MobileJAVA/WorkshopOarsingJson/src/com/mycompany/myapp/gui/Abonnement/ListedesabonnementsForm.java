@@ -34,6 +34,7 @@ public class ListedesabonnementsForm extends Form {
 
     private void listeab() {
         data = ServiceAbonnement.getInstance().getAllabonnements();
+        
         for (int i = 0; i < data.size(); i++) {
             Container x = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Container xx = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -49,6 +50,7 @@ public class ListedesabonnementsForm extends Form {
             Label prix = new Label("Prix : " + data.get(i).getPrix_ab());
             Label des = new Label("Description : " + data.get(i).getDesc_ab());
             Button modif = new Button(FontImage.MATERIAL_EDIT);
+            Button share = new Button(FontImage.MATERIAL_SHARE);
             Button supp = new Button(FontImage.MATERIAL_DELETE);
             modif.addActionListener(e -> new ModifierAbonnementForm(ab).show());
             supp.addActionListener(new ActionListener() {
@@ -58,6 +60,13 @@ public class ListedesabonnementsForm extends Form {
                     Dialog.show("Success", "Memory Deleted Successfully.", "OK", "Cancel");
                 }
             });
+            share.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    //ab.FacebookShare();
+                }
+            });
+            
             x.addAll(titre, type, prix);
             xx.addAll(supp, modif);
             all.addAll(x, des, xx, separation);
