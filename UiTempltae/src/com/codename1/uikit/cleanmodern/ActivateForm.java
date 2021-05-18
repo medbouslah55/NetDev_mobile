@@ -20,9 +20,12 @@
 package com.codename1.uikit.cleanmodern;
 
 import com.codename1.components.FloatingHint;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
+import com.codename1.ui.Command;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
@@ -30,8 +33,21 @@ import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.netdev.mindspace.services.MembreService;
+import com.sun.mail.smtp.SMTPTransport;
+import java.util.Date;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+ 
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+
+
+
 
 /**
  * Account activation UI
@@ -39,47 +55,100 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class ActivateForm extends BaseForm {
-
+        
+   TextField email;
     public ActivateForm(Resources res) {
+
         super(new BorderLayout());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
-        tb.setUIID("Container");
+        tb.setUIID("IMGLogin");
         getTitleArea().setUIID("Container");
         Form previous = Display.getInstance().getCurrent();
         tb.setBackCommand("", e -> previous.showBack());
         setUIID("Activate");
-        
-        add(BorderLayout.NORTH, 
+
+        add(BorderLayout.NORTH,
                 BoxLayout.encloseY(
-                        new Label(res.getImage("smily.png"), "LogoLabel"),
-                        new Label("Awsome Thanks!", "LogoLabel")
+                        new Label(res.getImage("Logo1.png"), "LogoLabel"),
+                        new Label("Vous avez oublier votre mot de passe!", "LogoLabel")
                 )
         );
-        
-        TextField code = new TextField("", "Enter Code", 20, TextField.PASSWORD);
-        code.setSingleLineTextArea(false);
-        
-        Button signUp = new Button("Sign Up");
-        Button resend = new Button("Resend");
-        resend.setUIID("CenterLink");
-        Label alreadHaveAnAccount = new Label("Already have an account?");
-        Button signIn = new Button("Sign In");
+
+        email = new TextField("", "Saisir votre email", 20, TextField.ANY);
+        email.setSingleLineTextArea(false);
+
+        Button valider = new Button("Valider");
+        //Label haveanAccount = new Label("Se connecter!");
+        Button signIn = new Button("Se connecter!");
         signIn.addActionListener(e -> previous.showBack());
-        signIn.setUIID("CenterLink");
-        
+        signIn.setUIID("CentreLink");
+
         Container content = BoxLayout.encloseY(
-                new FloatingHint(code),
+                new FloatingHint(email),
                 createLineSeparator(),
-                new SpanLabel("We've sent the confirmation code to your email. Please check your inbox", "CenterLabel"),
-                resend,
-                signUp,
-                FlowLayout.encloseCenter(alreadHaveAnAccount, signIn)
+                valider,
+                //    haveanAccount,
+                signIn
         );
+
         content.setScrollableY(true);
-        add(BorderLayout.SOUTH, content);
-        signUp.requestFocus();
-        signUp.addActionListener(e -> new NewsfeedForm(res).show());
+
+        add(BorderLayout.CENTER, content);
+
+        valider.requestFocus();
+
+        valider.addActionListener(e -> {
+            InfiniteProgress ip = new InfiniteProgress();
+            final Dialog ipDialog = ip.showInfiniteBlocking();
+
+            //Email API
+            
+            sendMail(res);
+            ipDialog.dispose();
+            Dialog.show("Recuperation mot de passe", "Nous avons envoyé le mot de passe a votre email.Verifier votre boite de reception", new Command("OK"));
+            new SignInForm(res).show();
+            refreshTheme();
+        });
+    }
+    
+    public static int generateRandomIntIntRange() {
+        Random r = new Random();
+        return r.nextInt((1000 - 50) + 1) + 50;
+    }
+    int x=generateRandomIntIntRange();
+    
+    //send email
+    public void sendMail(Resources res) {
+        try {
+            Properties props = new Properties();
+               props.put("mail.transport.protocol", "smtp"); //SMTP protocol
+               props.put("mail.smtps.host", "smtp.gmail.com"); //SMTP Host
+               props.put("mail.smtps.auth", "true"); //enable authentication
+
+            Session session = Session.getInstance(props, null);
+            MimeMessage msg = new MimeMessage(session);
+
+            msg.setFrom(new InternetAddress("Renitialisation du mot de passe <monEmail@domain.com>"));
+            msg.setRecipients(Message.RecipientType.TO, email.getText().toString());
+            msg.setSubject("Artistry : recuperation du mot de passe ");
+            msg.setSentDate(new Date(System.currentTimeMillis()));
+
+            String mp = MembreService.getInstance().getPasswordByEmail(email.getText().toString(), res);
+            String txt = "Bienvenue sur MindSpace : Voici votre mot de passe : " + mp;
+
+            msg.setText(txt);
+
+            SMTPTransport st = (SMTPTransport) session.getTransport("smtps");
+
+            st.connect("smtp.gmail.com", 465, "cite.de.la.culturec@gmail.com", "21039010");
+            st.sendMessage(msg, msg.getAllRecipients());
+
+            System.out.println("server response" + st.getLastServerResponse());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }

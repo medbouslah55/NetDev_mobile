@@ -35,6 +35,7 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import com.netdev.mindspace.services.MembreService;
 import com.netdev.mindspace.utils.Session;
 
 /**
@@ -42,14 +43,14 @@ import com.netdev.mindspace.utils.Session;
  *
  * @author Shai Almog
  */
-public class ProfileForm extends BaseForm {
+public class EditProfileForm extends BaseForm {
 
-    public ProfileForm(Resources res) {
+    public EditProfileForm(Resources res) {
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Profile");
+        setTitle("Edit Profile");
         getContentPane().setScrollVisible(false);
         
         super.addSideMenu(res);
@@ -65,16 +66,16 @@ public class ProfileForm extends BaseForm {
         sl.setUIID("BottomPad");
         sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
 
-        Button facebook = new Button("Edit Profile", res.getImage("facebook-logo.png"), "BottomPad");
-        Label twitter = new Label("486 followers", res.getImage("twitter-logo.png"), "BottomPad");
-        facebook.setTextPosition(BOTTOM);
+        
+        Button twitter = new Button("save", res.getImage("twitter-logo.png"), "BottomPad");
+        
         twitter.setTextPosition(BOTTOM);
         
         add(LayeredLayout.encloseIn(
                 sl,
                 BorderLayout.south(
                     GridLayout.encloseIn(3, 
-                            facebook,
+                            
                             FlowLayout.encloseCenter(
                                 new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond")),
                             twitter
@@ -82,40 +83,36 @@ public class ProfileForm extends BaseForm {
                 )
         ));
 
-        Label cin = new Label(Integer.toString(Session.getSession().getSessionUser().getCin()));
-        cin.setUIID("TextFieldBlack");
-        addStringValue("Cin", cin);
+        int cin = Session.getSession().getSessionUser().getCin();
         
-        Label nom = new Label(Session.getSession().getSessionUser().getNom());
+        TextField nom = new TextField(Session.getSession().getSessionUser().getNom());
         nom.setUIID("TextFieldBlack");
         addStringValue("Nom", nom);
         
-        Label prenom = new Label(Session.getSession().getSessionUser().getPrenom());
+        TextField prenom = new TextField(Session.getSession().getSessionUser().getPrenom());
         prenom.setUIID("TextFieldBlack");
-        addStringValue("prenom", prenom);
+        addStringValue("Prenom", prenom);
         
-        Label sexe = new Label(Session.getSession().getSessionUser().getSexe());
-        sexe.setUIID("TextFieldBlack");
-        addStringValue("sexe", sexe);
-        
-        Label taille = new Label(Float.toString(Session.getSession().getSessionUser().getTaille()));
+        TextField taille = new TextField(Float.toString(Session.getSession().getSessionUser().getTaille()));
         taille.setUIID("TextFieldBlack");
         addStringValue("Taille", taille);
         
-        Label poids = new Label(Float.toString(Session.getSession().getSessionUser().getPoids()));
+        TextField poids = new TextField(Float.toString(Session.getSession().getSessionUser().getPoids()));
         poids.setUIID("TextFieldBlack");
         addStringValue("Poids", poids);
-        
-        Label email = new Label(Session.getSession().getSessionUser().getEmail());
+
+        TextField email = new TextField(Session.getSession().getSessionUser().getEmail());
         email.setUIID("TextFieldBlack");
         addStringValue("E-Mail", email);
         
-        Label telephone = new Label(Integer.toString(Session.getSession().getSessionUser().getTelephone()));
+        TextField telephone = new TextField(Integer.toString(Session.getSession().getSessionUser().getTelephone()));
         telephone.setUIID("TextFieldBlack");
         addStringValue("Telephone", telephone);
         
-        facebook.addActionListener(e -> new EditProfileForm(res).show());
-      
+        twitter.addActionListener((e) -> {
+            MembreService.getInstance().update(cin, nom.getText(), prenom.getText(), Float.parseFloat(taille.getText()), Float.parseFloat(poids.getText()), email.getText(), Integer.parseInt(telephone.getText()));
+            Session.getSession().SetSessionUser(MembreService.getInstance().getUser(cin));
+        });
 
         
     }

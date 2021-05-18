@@ -33,6 +33,13 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import com.netdev.mindspace.services.MembreService;
+import com.sun.mail.smtp.SMTPTransport;
+import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * Signup UI
@@ -40,7 +47,7 @@ import com.netdev.mindspace.services.MembreService;
  * @author Shai Almog
  */
 public class SignUpForm extends BaseForm {
-
+        TextField email;
     public SignUpForm(Resources res) {
         super(new BorderLayout());
         Toolbar tb = new Toolbar(true);
@@ -57,7 +64,7 @@ public class SignUpForm extends BaseForm {
         TextField sexe = new TextField("", "Sexe", 20, TextField.ANY);
         TextField taille = new TextField("", "Taille", 20, TextField.ANY);
         TextField poids = new TextField("", "Poids", 20, TextField.ANY);
-        TextField email = new TextField("", "Email", 20, TextField.EMAILADDR);
+                   email = new TextField("", "Email", 20, TextField.EMAILADDR);
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
         TextField confirmPassword = new TextField("", "Confirm Password", 20, TextField.PASSWORD);
         TextField telephone = new TextField("", "telephone", 20, TextField.ANY);
@@ -112,10 +119,43 @@ public class SignUpForm extends BaseForm {
         next.requestFocus();
         next.addActionListener((e)-> {
             MembreService.getInstance().signup(cin, nom, prenom, sexe, taille, poids, email, password, telephone, res);
+            sendMail(res);
             Dialog.show("succes", "maintenant vous etes Inscri", "ok",null);
             new SignInForm(res).show();
         });
         
+    }
+    
+    public void sendMail(Resources res) {
+        try {
+            Properties props = new Properties();
+               props.put("mail.transport.protocol", "smtp"); //SMTP protocol
+               props.put("mail.smtps.host", "smtp.gmail.com"); //SMTP Host
+               props.put("mail.smtps.auth", "true"); //enable authentication
+
+            Session session = Session.getInstance(props, null);
+            MimeMessage msg = new MimeMessage(session);
+
+            msg.setFrom(new InternetAddress("MindSpace <monEmail@domain.com>"));
+            msg.setRecipients(Message.RecipientType.TO, email.getText().toString());
+            msg.setSubject("Bienvenu chez MindSpace ");
+            msg.setSentDate(new Date(System.currentTimeMillis()));
+
+            
+            String txt = "Bienvenue sur MindSpave : Votre compte a été cree avec succès ";
+
+            msg.setText(txt);
+
+            SMTPTransport st = (SMTPTransport) session.getTransport("smtps");
+
+            st.connect("smtp.gmail.com", 465, "cite.de.la.culturec@gmail.com", "21039010");
+            st.sendMessage(msg, msg.getAllRecipients());
+
+            System.out.println("server response" + st.getLastServerResponse());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }

@@ -22,13 +22,17 @@ package com.codename1.uikit.cleanmodern;
 import com.codename1.components.FloatingHint;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.netdev.mindspace.services.MembreService;
+import com.netdev.mindspace.utils.Session;
 
 /**
  * Sign in UI
@@ -50,28 +54,60 @@ public class SignInForm extends BaseForm {
         
         add(BorderLayout.NORTH, new Label(res.getImage("Logo1.png"), "LogoLabel"));
         
-        TextField username = new TextField("", "Username", 20, TextField.ANY);
+        TextField email = new TextField("", "Email", 20, TextField.ANY);
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
-        username.setSingleLineTextArea(false);
+        email.setSingleLineTextArea(false);
         password.setSingleLineTextArea(false);
         Button signIn = new Button("Sign In");
         Button signUp = new Button("Sign Up");
+        Button mp = new Button("mot de passe oublier","centerLabel1");
         signUp.addActionListener(e -> new SignUpForm(res).show());
         signUp.setUIID("Link");
         Label doneHaveAnAccount = new Label("Don't have an account?");
         
         Container content = BoxLayout.encloseY(
-                new FloatingHint(username),
+                new FloatingHint(email),
                 createLineSeparator(),
                 new FloatingHint(password),
                 createLineSeparator(),
                 signIn,
-                FlowLayout.encloseCenter(doneHaveAnAccount, signUp)
+                FlowLayout.encloseCenter(doneHaveAnAccount, signUp),
+                FlowLayout.encloseCenter(mp)
+                
         );
         content.setScrollableY(true);
         add(BorderLayout.SOUTH, content);
         signIn.requestFocus();
-        signIn.addActionListener(e -> new NewsfeedForm(res).show());
+        signIn.addActionListener((e)->{
+           //MembreService.getInstance().signin(email, password, res);
+           //pour tester mehdi
+           String cnxResultat = MembreService.getInstance().connect(email, password);
+           if (cnxResultat.compareTo("password") == 0)
+           {
+               Dialog.show("Erreur", "votre password est incorrect", "ok",null);
+           }
+           else if (cnxResultat.compareTo("false") == 0)
+           {
+               Dialog.show("Erreur", "votre Email ou password incorrect", "ok",null);
+           }else if(cnxResultat.compareTo("true") == 0)
+           {
+               Dialog.show("succes", "tous va bien", "ok",null);
+               Session.StartSession();
+               Session.getSession().SetSessionUser(MembreService.getInstance().getUser(email.getText()));
+               System.out.print(Session.getSession().getSessionUser());
+               
+               Form profil = new ProfileForm(res);
+               profil.show();
+           }
+           
+           
+           
+           
+            
+        });
+        mp.addActionListener((e) -> {
+            new ActivateForm(res).show();
+        });
     }
     
 }
