@@ -49,15 +49,13 @@ public class ListedesabonnementsForm extends Form {
             Label type = new Label("Type : " + data.get(i).getType_ab());
             Label prix = new Label("Prix : " + data.get(i).getPrix_ab());
             Label des = new Label("Description : " + data.get(i).getDesc_ab());
-            Button modif = new Button(FontImage.MATERIAL_EDIT);
             Button share = new Button(FontImage.MATERIAL_SHARE);
-            Button supp = new Button(FontImage.MATERIAL_DELETE);
-            modif.addActionListener(e -> new ModifierAbonnementForm(ab).show());
-            supp.addActionListener(new ActionListener() {
+            Button achat = new Button(FontImage.MATERIAL_CARD_GIFTCARD);
+            
+            achat.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    ServiceAbonnement.getInstance().deleteAbonnement(ab);
-                    Dialog.show("Success", "Memory Deleted Successfully.", "OK", "Cancel");
+                    
                 }
             });
             share.addActionListener(new ActionListener() {
@@ -68,7 +66,7 @@ public class ListedesabonnementsForm extends Form {
             });
             
             x.addAll(titre, type, prix);
-            xx.addAll(supp, modif);
+            xx.addAll(achat,share);
             all.addAll(x, des, xx, separation);
 
         }
