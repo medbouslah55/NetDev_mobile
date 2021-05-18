@@ -5,10 +5,13 @@
  */
 package com.mycompany.myapp.gui.Abonnement;
 
-import com.mycompany.myapp.gui.Abonnement.ModifierAbonnementForm;
+import com.codename1.ads.AdsService;
+import com.codename1.components.Ads;
+import com.codename1.social.FacebookConnect;
+import com.codename1.social.GoogleConnect;
+import com.codename1.social.Login;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
@@ -26,11 +29,12 @@ import java.util.ArrayList;
 public class ListedesabonnementsForm extends Form {
 
     Form current;
-    
     ArrayList<Abonnement> data = new ArrayList<>();
     ArrayList<Abonnement> datatrier = new ArrayList<>();
     Container all = new Container(new BoxLayout(BoxLayout.Y_AXIS));
     Container tri = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+
+    
 
     private void listeab() {
         data = ServiceAbonnement.getInstance().getAllabonnements();
@@ -49,21 +53,31 @@ public class ListedesabonnementsForm extends Form {
             Label type = new Label("Type : " + data.get(i).getType_ab());
             Label prix = new Label("Prix : " + data.get(i).getPrix_ab());
             Label des = new Label("Description : " + data.get(i).getDesc_ab());
-            Button share = new Button(FontImage.MATERIAL_SHARE);
+            Button share = new Button(FontImage.MATERIAL_FACE);
             Button achat = new Button(FontImage.MATERIAL_CARD_GIFTCARD);
             
-            achat.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-                    
-                }
-            });
+            
             share.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    //ab.FacebookShare();
+                String clientId = "1171134366245722";
+                String redirectURI = "http://www.codenameone.com/";
+                String clientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXX";
+                Login fb = FacebookConnect.getInstance();
+                fb.setClientId(clientId);
+                fb.setRedirectURI(redirectURI);
+                fb.setClientSecret(clientSecret);
+                if(!fb.isUserLoggedIn()){
+                    fb.doLogin();
+                }else{
+                    //get the token and now you can query the facebook API
+                    String token = fb.getAccessToken().getToken();
+                }
+  
+
                 }
             });
+            
             
             x.addAll(titre, type, prix);
             xx.addAll(achat,share);

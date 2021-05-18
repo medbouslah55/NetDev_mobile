@@ -49,8 +49,8 @@ public class ajouterReclamationForm extends Form {
         
         
         //regex check 
-        v.addConstraint(tfnom, new RegexConstraint("[a-zA-Z]{3,20}", "Format Nom Invalide"));
-        v.addConstraint(tfprenom, new RegexConstraint("[a-zA-Z]{3,20}", "Format Prénom Invalide"));
+        v.addConstraint(tfnom, new RegexConstraint("[a-zA-Z]{6,20}", "Format Nom Invalide"));
+        v.addConstraint(tfprenom, new RegexConstraint("[a-zA-Z]{6,20}", "Format Prénom Invalide"));
         v.addConstraint(tfmail, new RegexConstraint("^(.+)@(.+)$", "Format E-mail Invalide"));
         v.addSubmitButtons(btnValidee);
         
