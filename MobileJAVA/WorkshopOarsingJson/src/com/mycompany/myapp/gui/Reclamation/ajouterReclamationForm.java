@@ -16,7 +16,6 @@ import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.table.TableLayout;
 import com.codename1.ui.validation.RegexConstraint;
 import com.codename1.ui.validation.Validator;
 import com.mycompany.myapp.entities.Reclamation;
@@ -28,13 +27,7 @@ import com.mycompany.myapp.services.ServiceReclamation;
  */
 public class ajouterReclamationForm extends Form {
 
-    public ajouterReclamationForm() {
-        Form val = new Form();
-        TableLayout tl;
-        tl = new TableLayout(TOP,CENTER);
-        
-        tl.setGrowHorizontally(true);
-        val.setLayout(tl);
+    public ajouterReclamationForm(Form val) {
         Validator v = new Validator();
         setTitle("Ajouter Nouveau Reclamation");
         setLayout(BoxLayout.y());
@@ -45,10 +38,15 @@ public class ajouterReclamationForm extends Form {
         TextField tfmail = new TextField("", "E-mail");
 
         ComboBox tftype = new ComboBox("Type De Probléme", "Probleme technique", "Probleme de connexion", "Probleme Au Niveau De Payemant", "Probleme Au Niveau De Reservation");
-        //TextField tftype = new TextField("", "Type");
+        
         TextField tfdescription = new TextField("", "Description");
-        Label notice = new Label("* Votre Nom & Prénom doivent étre:" + "\n" + "-Entre 6 et 20 caractéres" + "\n" + "-Contenir des caractére alphabétique");
+        
         Button btnValidee = new Button("Enregistrer");
+        String Newligne=System.getProperty("line.separator");
+        Label notice = new Label("* Votre Nom & Prénom doivent étre:");
+        Label notice1 = new Label("-Entre 6 et 20 caractéres");
+        Label notice2 = new Label("-Contenir des caractére alphabétique");
+        
         
         
         //regex check 
@@ -56,17 +54,11 @@ public class ajouterReclamationForm extends Form {
         v.addConstraint(tfprenom, new RegexConstraint("[a-zA-Z]{6,20}", "Format Prénom Invalide"));
         v.addConstraint(tfmail, new RegexConstraint("^(.+)@(.+)$", "Format E-mail Invalide"));
         v.addSubmitButtons(btnValidee);
+        
         btnValidee.addActionListener(new ActionListener() {
             @Override
 
             public void actionPerformed(ActionEvent evt) {
-                
-//                if (!v.isValid()) {
-//                    String msg = v.getErrorMessageUIID();
-//                    Dialog.show("ERROR", msg, new Command("OK"));
-//                } 
-//                
-//                else {
                     try {
                         Reclamation a = new Reclamation(tfnom.getText(), tfprenom.getText(), tfmail.getText(), tftype.getSelectedItem().toString(), tfdescription.getText(), "En Cours");
 
@@ -82,13 +74,14 @@ public class ajouterReclamationForm extends Form {
                     }
 
                 }
-
-            //}
         });
 
-        val.addAll(tfnom, tfprenom, tfmail, tftype, tfdescription, btnValidee, notice);
+        addAll(tfnom, tfprenom, tfmail, tftype, tfdescription, btnValidee, notice,notice1,notice2);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK,
                 e -> val.showBack()); // Revenir vers l'interface précédente
+        
+        
+        
     }
     
     

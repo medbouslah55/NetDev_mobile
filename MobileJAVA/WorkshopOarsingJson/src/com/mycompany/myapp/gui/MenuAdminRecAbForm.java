@@ -31,7 +31,7 @@ public class MenuAdminRecAbForm extends Form{
         Button addAb = new Button("Ajouter nouveau type d'abonnements");
         Button addRec = new Button("Passer Une Réclamation");
 
-        addRec.addActionListener(e -> new ajouterReclamationForm().show());
+        addRec.addActionListener(e -> new ajouterReclamationForm(current).show());
         allAb.addActionListener(e -> new ListedesabonnementsForm(current).show());
         allRec.addActionListener(e -> new ListedesreclamationsForm(current).show());
         addAb.addActionListener(e -> new ajouterAbonnementForm(current).show());

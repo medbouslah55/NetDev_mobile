@@ -24,7 +24,7 @@ public class MenuUserAbRec extends Form {
    
         Button addRec = new Button("Passer Une Réclamation");
 
-        addRec.addActionListener(e -> new ajouterReclamationForm().show());
+        addRec.addActionListener(e -> new ajouterReclamationForm(current).show());
 
         addAll(addRec);
 

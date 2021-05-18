@@ -4,8 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Firas/Documents/GitHub/NetDev_mobile/MobileJAVA/WorkshopOarsingJson/src/com/mycompany/myapp/gui/Abonnement/ListedesabonnementsForm.java</file>
-            <file>file:/C:/Users/Firas/Documents/GitHub/NetDev_mobile/MobileJAVA/WorkshopOarsingJson/src/com/mycompany/myapp/gui/Abonnement/ajouterAbonnementForm.java</file>
+            <file>file:/C:/Users/Firas/Documents/GitHub/NetDev_mobile/MobileJAVA/WorkshopOarsingJson/src/com/mycompany/myapp/gui/MenuAdminRecAbForm.java</file>
+            <file>file:/C:/Users/Firas/Documents/GitHub/NetDev_mobile/MobileJAVA/WorkshopOarsingJson/src/com/mycompany/myapp/gui/Reclamation/ListedesreclamationsForm.java</file>
+            <file>file:/C:/Users/Firas/Documents/GitHub/NetDev_mobile/MobileJAVA/WorkshopOarsingJson/src/com/mycompany/myapp/gui/Reclamation/ajouterReclamationForm.java</file>
+            <file>file:/C:/Users/Firas/Documents/GitHub/NetDev_mobile/MobileJAVA/WorkshopOarsingJson/src/com/mycompany/myapp/gui/Reclamation/StatistiquesForm.java</file>
         </group>
     </open-files>
 </project-private>

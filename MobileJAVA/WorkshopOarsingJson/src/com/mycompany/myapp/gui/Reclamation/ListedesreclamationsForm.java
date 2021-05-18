@@ -28,8 +28,8 @@ public class ListedesreclamationsForm extends Form {
     Container all = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 
     public void listedesreclamations() {
+        Form current=this;
         data = ServiceReclamation.getInstance().getAllReclamation();
-        System.out.println(data);
         for (int i = 0; i < data.size(); i++) {
             Container x = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Container xx = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -61,6 +61,7 @@ public class ListedesreclamationsForm extends Form {
                 public void actionPerformed(ActionEvent evt) {
                     ServiceReclamation.getInstance().deleteReclamation(ab);
                     Dialog.show("Success", "Memory Deleted Successfully.", "OK", "Cancel");
+                    new ListedesreclamationsForm(current).show();
                 }
             });
         }
