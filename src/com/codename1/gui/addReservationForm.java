@@ -17,12 +17,15 @@ import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.list.GenericListCellRenderer;
 import com.codename1.ui.spinner.Picker;
+import com.codename1.ui.validation.RegexConstraint;
+import com.codename1.ui.validation.Validator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +40,7 @@ public class addReservationForm extends Form {
     String date;
     String price,name;
     Form current;
+    Validator v = new Validator();
     public addReservationForm(Form previous) {
         current = this;
         setTitle("Ajouter Reservation");
@@ -45,7 +49,16 @@ public class addReservationForm extends Form {
         TextField tfnom = new TextField("", "nom");
         TextField tfprenom = new TextField("", "prenom");
         TextField tfnbrPlace = new TextField("", "nbPlace");
-
+        
+        
+        v.addConstraint(tfnom, new RegexConstraint("[a-zA-Z]{3,20}", "Format Nom Invalide"));
+        v.addConstraint(tfprenom, new RegexConstraint("[a-zA-Z]{3,20}", "Format Prénom Invalide"));
+        v.addConstraint(tfnbrPlace, new RegexConstraint("[1-9]", "Format Nbr de place Invalide"));
+        
+        Label notice = new Label ("Votre Nom doit contenir plus de 3 caracteres");
+        Label notice2 = new Label ("Votre Prenom doit contenir plus de 3 caracteres");
+        Label notice3 = new Label ("Le nombre de place doit etre un entier");
+        
         Picker datePicker = new Picker();
         datePicker.setType(Display.PICKER_TYPE_DATE);
 
@@ -75,9 +88,11 @@ public class addReservationForm extends Form {
                 System.out.println(rowindex);
             }
         });
-
+            
         Button btnValider = new Button("Add Reservation");
+        v.addSubmitButtons(btnValider);
 
+       
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -131,5 +146,7 @@ public class addReservationForm extends Form {
         entry.put("Line2", date);
         return entry;
     }
+        //regex check 
+       
 
 }

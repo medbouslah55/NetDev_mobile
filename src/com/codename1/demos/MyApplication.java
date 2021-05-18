@@ -48,8 +48,8 @@ public class MyApplication {
         new HomeForm().show();
         LocalNotification n = new LocalNotification();
         n.setId("demo-notification");
-        n.setAlertBody("Veuillez consuler notre activite");
-        n.setAlertTitle("Relax!");
+        n.setAlertBody("Prenez une pause!!");
+        n.setAlertTitle("Il est temps de faire une pause et de consulter nos activités");
         n.setAlertSound("/notification_sound_bells.mp3"); //file name must begin with notification_sound
 
 
