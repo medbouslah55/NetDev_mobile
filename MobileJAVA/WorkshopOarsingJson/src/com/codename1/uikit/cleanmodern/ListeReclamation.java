@@ -21,19 +21,13 @@ package com.codename1.uikit.cleanmodern;
 
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
-import com.codename1.ui.ButtonGroup;
-import com.codename1.ui.Component;
 import static com.codename1.ui.Component.BOTTOM;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
-import com.codename1.ui.RadioButton;
-import com.codename1.ui.Tabs;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
@@ -45,8 +39,6 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.Reclamation;
-import com.mycompany.myapp.gui.Reclamation.ListedesreclamationsForm;
-import com.mycompany.myapp.gui.Reclamation.modifierReclamationForm;
 import com.mycompany.myapp.services.ServiceReclamation;
 import java.util.ArrayList;
 
@@ -109,14 +101,14 @@ public class ListeReclamation extends BaseForm {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Passer Une Réclamation");
+        setTitle("Liste Des Réclamations");
         getContentPane().setScrollVisible(false);
 
         super.addSideMenu(res);
 
         tb.addSearchCommand(e -> {
         });
-
+        
         Image img = res.getImage("profile-background.jpg");
         if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);

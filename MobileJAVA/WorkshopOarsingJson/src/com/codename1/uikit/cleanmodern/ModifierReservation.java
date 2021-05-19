@@ -59,11 +59,13 @@ import java.util.Map;
  * @author Shai Almog
  */
 public class ModifierReservation extends BaseForm {
+
     String rowindex;
     String date;
-    String price,name;
+    String price, name;
     Form current;
     Validator v = new Validator();
+    
 
     public ModifierReservation(Resources res,Reservation ab) {
         super("Newsfeed", BoxLayout.y());
@@ -105,11 +107,11 @@ public class ModifierReservation extends BaseForm {
 
         Validator v = new Validator();
 
-        TextField tfnom = new TextField();
+        TextField tfnom = new TextField(ab.getNom(), "nom");
         tfnom.setUIID("TextFieldBlack");
         addStringValue("Nom", tfnom);
         ////////////////////////////////////////////////////////////////////////////////////////
-        TextField tfprenom = new TextField();
+        TextField tfprenom = new TextField(ab.getPrenom(), "prenom");
         tfprenom.setUIID("TextFieldBlack");
         addStringValue("Prénom", tfprenom);
         ///////////////////////////////////////////////////////////////////////////////////////
@@ -125,11 +127,10 @@ public class ModifierReservation extends BaseForm {
                 date = datePicker.getText();
             }
         });
-          ////////////////////////////////////////////////////////////////////////////////////////
-        TextField tfnbrPlace = new TextField();
+        ////////////////////////////////////////////////////////////////////////////////////////
+        TextField tfnbrPlace = new TextField(String.valueOf(ab.getNb_place()), "nbPlace");
         tfnbrPlace.setUIID("TextFieldBlack");
         addStringValue("nbPlace", tfnbrPlace);
-        
 
         ComboBox<Map<String, Object>> combo = new ComboBox<>(
                 createListEntry("Zumba", "100"),
@@ -149,10 +150,8 @@ public class ModifierReservation extends BaseForm {
                 System.out.println(rowindex);
             }
         });
-            
-      
-        ////////////////////////////////////////////////////////////////////////////////////////
 
+        ////////////////////////////////////////////////////////////////////////////////////////
         Label notice = new Label("* Votre Nom & Prénom doivent étre:");
         Label notice1 = new Label("-Entre 3 et 20 caractéres");
         Label notice2 = new Label("-Contenir des caractére alphabétique");
@@ -166,14 +165,12 @@ public class ModifierReservation extends BaseForm {
 
         /////////////////////////////////////////////////////////////////////////////////////////
         //regex check 
-        
         v.addConstraint(tfnom, new RegexConstraint("[a-zA-Z]{3,20}", "Format Nom Invalide"));
         v.addConstraint(tfprenom, new RegexConstraint("[a-zA-Z]{3,20}", "Format Prénom Invalide"));
         v.addConstraint(tfnbrPlace, new RegexConstraint("[1-9]", "Format Nbr de place Invalide"));
         v.addSubmitButtons(btnValider);
-  
 
-     btnValider.addActionListener(new ActionListener() {
+        btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
 
@@ -181,14 +178,14 @@ public class ModifierReservation extends BaseForm {
                 if (ServiceReservation.getInstance().updateAbonnement(a)) {
                     Dialog.show("Success", "Votre reservation a été modifier avec succès !", new Command("OK"));
                     new ListeReservation(res).show();
-                    
+
                 } else {
                     Dialog.show("ERROR", "Erreur au moment de la modification", new Command("OK"));
-                    
+
                 }
             }
         });
-       
+
         addStringValue("", notice);
         addStringValue("", notice1);
         addStringValue("", notice2);
@@ -200,7 +197,8 @@ public class ModifierReservation extends BaseForm {
                 add(BorderLayout.CENTER, v));
         add(createLineSeparator(0xeeeeee));
     }
-       private Map<String, Object> createListEntry(String name, String date) {
+
+    private Map<String, Object> createListEntry(String name, String date) {
         Map<String, Object> entry = new HashMap<>();
         entry.put("Line1", name);
         entry.put("Line2", date);

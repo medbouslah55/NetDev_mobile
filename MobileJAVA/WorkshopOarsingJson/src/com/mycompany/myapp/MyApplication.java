@@ -68,7 +68,6 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.io.Log;
 import com.codename1.ui.Toolbar;
-import com.codename1.uikit.cleanmodern.ListeReclamation;
 import com.codename1.uikit.cleanmodern.PasserReservation;
 
 /**

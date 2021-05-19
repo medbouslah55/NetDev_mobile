@@ -195,6 +195,7 @@ public class PasserReservation extends BaseForm {
             }
         });
         Button btnpanier = new Button("procéder au paiment");
+        addStringValue("", btnpanier);
 
         btnpanier.addActionListener(new ActionListener() {
             @Override
@@ -205,7 +206,7 @@ public class PasserReservation extends BaseForm {
                     try {
                         Reservation u = new Reservation(tfnom.getText(), tfprenom.getText(), date, rowindex, Integer.parseInt(tfnbrPlace.getText()));
                         
-                        //new PanierForm(rowindex,price,tfnbrPlace.getText(),current).show();
+                       new Panier(res,rowindex,price,tfnbrPlace.getText()).show();
                     } catch (NumberFormatException e) {
                         Dialog.show("ERROR", "Status must be a number", new Command("OK"));
                     }

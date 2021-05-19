@@ -3,36 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.myapp.gui.Abonnement;
+package com.codename1.uikit.cleanmodern;
 
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.social.FacebookConnect;
 import com.codename1.social.Login;
 import com.codename1.ui.Button;
+import static com.codename1.ui.Component.BOTTOM;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.Abonnement;
 import com.mycompany.myapp.services.ServiceAbonnement;
+import com.mycompany.myapp.services.ServiceReclamation;
 import java.util.ArrayList;
 
 /**
  *
  * @author Firas
  */
-public class ListedesabonnementsForm extends Form {
-
-    Form current;
-    ArrayList<Abonnement> data = new ArrayList<>();
+public class ListeDesAbonnements extends BaseForm {
+      ArrayList<Abonnement> data = new ArrayList<>();
   
     Container all = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-    Container tri = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-
-    
-
     private void listeab() {
         data = ServiceAbonnement.getInstance().getAllabonnements();
         
@@ -85,13 +90,46 @@ public class ListedesabonnementsForm extends Form {
         
 
     }
+    public ListeDesAbonnements(Resources res) {
+        super("Newsfeed", BoxLayout.y());
+        Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        setTitle("Liste Des Abonnements");
+        getContentPane().setScrollVisible(false);
 
-    public ListedesabonnementsForm(Form previous) {
+        super.addSideMenu(res);
 
-        setTitle("Listes  Des Abonnements");
+        tb.addSearchCommand(e -> {
+        });
+        
+        Image img = res.getImage("profile-background.jpg");
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        int nb = ServiceAbonnement.getInstance().getAllabonnements().size();
+        Label NB = new Label(nb+"  Réclamations");
+        
+        //Label facebook = new Label("786 followers", FontImage.MATERIAL_DELETE, "BottomPad");
+        Label twitter = new Label("486 followers", res.getImage("twitter-logo.png"), "BottomPad");
+        NB.setTextPosition(BOTTOM);
+        twitter.setTextPosition(BOTTOM);
+
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(3,
+                                NB,
+                                FlowLayout.encloseCenter(
+                                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond")),
+                                twitter
+                        )
+                )
+        ));
         listeab();
-        addAll(all);
-        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK,
-                 e -> previous.showBack());
-    }
+        add(all);
+}
 }

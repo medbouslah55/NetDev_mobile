@@ -16,7 +16,6 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
-
 package com.codename1.uikit.cleanmodern;
 
 import com.codename1.components.ScaleImageLabel;
@@ -50,14 +49,13 @@ public class BaseForm extends Form {
     public BaseForm(String title, Layout contentPaneLayout) {
         super(title, contentPaneLayout);
     }
-    
-    
+
     public Component createLineSeparator() {
         Label separator = new Label("", "WhiteSeparator");
         separator.setShowEvenIfBlank(true);
         return separator;
     }
-    
+
     public Component createLineSeparator(int color) {
         Label separator = new Label("", "WhiteSeparator");
         separator.getUnselectedStyle().setBgColor(color);
@@ -69,23 +67,27 @@ public class BaseForm extends Form {
     protected void addSideMenu(Resources res) {
         Toolbar tb = getToolbar();
         Image img = res.getImage("profile-background.jpg");
-        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
         ScaleImageLabel sl = new ScaleImageLabel(img);
         sl.setUIID("BottomPad");
         sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-        
+
         tb.addComponentToSideMenu(LayeredLayout.encloseIn(
                 sl,
                 FlowLayout.encloseCenterBottom(
                         new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
         ));
-        
+
+        tb.addMaterialCommandToSideMenu("Passer Une Réclamation", FontImage.MATERIAL_RATE_REVIEW, e -> new PasserReclamation(res).show());
         tb.addMaterialCommandToSideMenu("Liste Des Réclamations", FontImage.MATERIAL_LIST, e -> new ListeReclamation(res).show());
-        tb.addMaterialCommandToSideMenu("Passer Une Réclamation", FontImage.MATERIAL_RECOMMEND, e -> new PasserReclamation(res).show());
-        tb.addMaterialCommandToSideMenu("Passer Une Reservation", FontImage.MATERIAL_ADD_MODERATOR, e -> new PasserReservation(res).show());
+        tb.addMaterialCommandToSideMenu("Passer Une Reservation", FontImage.MATERIAL_BOOKMARK, e -> new PasserReservation(res).show());
         tb.addMaterialCommandToSideMenu("Listes  Des Reservations", FontImage.MATERIAL_LIST, e -> new ListeReservation(res).show());
+
+        tb.addMaterialCommandToSideMenu("Liste Des Abonnements", FontImage.MATERIAL_LIST, e -> new ListeDesAbonnements(res).show());
+        tb.addMaterialCommandToSideMenu("Statistiques", FontImage.MATERIAL_PIE_CHART, e -> new Statistique(res).show());
+
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show());
     }
 }
