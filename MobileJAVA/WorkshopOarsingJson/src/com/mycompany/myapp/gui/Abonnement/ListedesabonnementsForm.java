@@ -5,10 +5,7 @@
  */
 package com.mycompany.myapp.gui.Abonnement;
 
-import com.codename1.ads.AdsService;
-import com.codename1.components.Ads;
 import com.codename1.social.FacebookConnect;
-import com.codename1.social.GoogleConnect;
 import com.codename1.social.Login;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
@@ -53,7 +50,7 @@ public class ListedesabonnementsForm extends Form {
             Label type = new Label("Type : " + data.get(i).getType_ab());
             Label prix = new Label("Prix : " + data.get(i).getPrix_ab());
             Label des = new Label("Description : " + data.get(i).getDesc_ab());
-            Button share = new Button(FontImage.MATERIAL_FACE);
+            Button share = new Button(FontImage.MATERIAL_SHARE);
             Button achat = new Button(FontImage.MATERIAL_CARD_GIFTCARD);
             
             
@@ -85,7 +82,7 @@ public class ListedesabonnementsForm extends Form {
 
         }
         
-        addAll(all);
+        
 
     }
 
@@ -93,6 +90,7 @@ public class ListedesabonnementsForm extends Form {
 
         setTitle("Listes  Des Abonnements");
         listeab();
+        addAll(all);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK,
                  e -> previous.showBack());
     }

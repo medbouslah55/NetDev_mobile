@@ -29,6 +29,7 @@ public class ajouterReclamationForm extends Form {
 
     public ajouterReclamationForm(Form val) {
         Validator v = new Validator();
+        
         setTitle("Ajouter Nouveau Reclamation");
         setLayout(BoxLayout.y());
 
