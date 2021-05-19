@@ -22,6 +22,7 @@ package com.codename1.uikit.cleanmodern;
 
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
+import com.codename1.notifications.LocalNotification;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.Dialog;
@@ -53,10 +54,24 @@ public class CleanModern {
     }
     
     public void start() {
+        
         if(current != null){
             current.show();
             return;
+            
         }
+        LocalNotification n = new LocalNotification();
+        n.setId("demo-notification");
+        n.setAlertBody("Prenez une pause!!");
+        n.setAlertTitle("Il est temps de faire une pause et de consulter nos activités");
+        n.setAlertSound("/notification_sound_bells.mp3"); //file name must begin with notification_sound
+
+
+        Display.getInstance().scheduleLocalNotification(
+                n,
+                System.currentTimeMillis() + 10 * 100, // fire date/time
+                LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
+        );
         new WalkthruForm(theme).show();
 //        new MapForm().show();
 //        new AfficherListRegime(theme).show();

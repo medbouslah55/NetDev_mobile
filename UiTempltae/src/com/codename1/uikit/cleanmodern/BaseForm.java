@@ -95,6 +95,13 @@ public class BaseForm extends Form {
         tb.addMaterialCommandToSideMenu("Centre", FontImage.MATERIAL_HOME_WORK, e -> new ListCentre(res).show());
         tb.addMaterialCommandToSideMenu("Evenement", FontImage.MATERIAL_EXIT_TO_APP, e -> new AfficherListeEvenement(res).show());
         tb.addMaterialCommandToSideMenu("Status", FontImage.MATERIAL_EXIT_TO_APP, e -> new AfficherListeStatus(res).show());
+        tb.addMaterialCommandToSideMenu("Passer Une Réclamation", FontImage.MATERIAL_RATE_REVIEW, e -> new PasserReclamation(res).show());
+        tb.addMaterialCommandToSideMenu("Liste Des Réclamations", FontImage.MATERIAL_LIST, e -> new ListeReclamation(res).show());
+        tb.addMaterialCommandToSideMenu("Passer Une Reservation", FontImage.MATERIAL_BOOKMARK, e -> new PasserReservation(res).show());
+        tb.addMaterialCommandToSideMenu("Listes  Des Reservations", FontImage.MATERIAL_LIST, e -> new ListeReservation(res).show());
+
+        tb.addMaterialCommandToSideMenu("Liste Des Abonnements", FontImage.MATERIAL_LIST, e -> new ListeDesAbonnements(res).show());
+        tb.addMaterialCommandToSideMenu("Statistiques", FontImage.MATERIAL_PIE_CHART, e -> new Statistique(res).show());
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, (e) -> { 
             Session.getSession().clearSession();
             Form signIn = new SignInForm(res);
