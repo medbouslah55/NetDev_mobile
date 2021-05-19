@@ -12,22 +12,17 @@ import com.codename1.charts.renderers.SimpleSeriesRenderer;
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.charts.views.PieChart;
 import com.codename1.components.ScaleImageLabel;
-import static com.codename1.ui.Component.BOTTOM;
 import com.codename1.ui.Display;
-import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.Reclamation;
-import com.mycompany.myapp.services.ServiceAbonnement;
 import com.mycompany.myapp.services.ServiceReclamation;
 import java.util.ArrayList;
 
@@ -82,11 +77,23 @@ private DefaultRenderer buildCategoryRenderer(int[] colors) {
 }
     public Form CreateForm(){
         int[] colors = new int[]{ColorUtil.BLUE, ColorUtil.rgb(10,163,79),ColorUtil.rgb(247,28,5), ColorUtil.rgb(243,137,29)};
+        
+        
     DefaultRenderer renderer = buildCategoryRenderer(colors);
-    renderer.setChartTitleTextSize(20);
-    renderer.setDisplayValues(true);
-    renderer.setShowLabels(true);
-    SimpleSeriesRenderer r = renderer.getSeriesRendererAt(0);
+    
+    
+//    renderer.setChartTitleTextSize(20);
+//    renderer.setDisplayValues(true);
+//    renderer.setShowLabels(true);
+//    SimpleSeriesRenderer r = renderer.getSeriesRendererAt(0);
+renderer.setZoomButtonsVisible(true);
+        renderer.setZoomEnabled(true);
+        renderer.setChartTitleTextSize(20);
+        renderer.setLabelsColor(ColorUtil.BLACK);
+        renderer.setLabelsTextSize(18);
+        renderer.setDisplayValues(true);
+        renderer.setShowLabels(true);
+        SimpleSeriesRenderer r = renderer.getSeriesRendererAt(0);
     
 
     // Create the chart ... pass the values and renderer to the chart object.
