@@ -84,6 +84,8 @@ public class BaseForm extends Form {
         
         tb.addMaterialCommandToSideMenu("Liste Des Réclamations", FontImage.MATERIAL_LIST, e -> new ListeReclamation(res).show());
         tb.addMaterialCommandToSideMenu("Passer Une Réclamation", FontImage.MATERIAL_RECOMMEND, e -> new PasserReclamation(res).show());
+        tb.addMaterialCommandToSideMenu("Passer Une Reservation", FontImage.MATERIAL_ADD_MODERATOR, e -> new PasserReservation(res).show());
+        tb.addMaterialCommandToSideMenu("Listes  Des Reservations", FontImage.MATERIAL_LIST, e -> new ListeReservation(res).show());
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show());
     }
 }
