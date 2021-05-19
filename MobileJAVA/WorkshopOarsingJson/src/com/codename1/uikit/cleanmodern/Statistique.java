@@ -14,6 +14,8 @@ import com.codename1.charts.views.PieChart;
 import com.codename1.components.ScaleImageLabel;
 import static com.codename1.ui.Component.BOTTOM;
 import com.codename1.ui.Display;
+import com.codename1.ui.FontImage;
+import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
@@ -35,6 +37,7 @@ import java.util.ArrayList;
  */
 public class Statistique extends BaseForm{
      ArrayList<Reclamation> data = new ArrayList<>();
+     Form t;
     /**
  * Creates a renderer for the specified colors.
  */
@@ -72,52 +75,13 @@ private DefaultRenderer buildCategoryRenderer(int[] colors) {
         series.add("Probleme de connexion", pc);
         series.add("Probleme Au Niveau De Reservation", pr);
         series.add("Probleme Au Niveau De Payemant", pp);
+        
+        
     
     return series;
 }
-    
-    public Statistique(Resources res) {
-        super("Newsfeed", BoxLayout.y());
-        Toolbar tb = new Toolbar(true);
-        setToolbar(tb);
-        getTitleArea().setUIID("Container");
-        setTitle("Liste Des Réclamations");
-        getContentPane().setScrollVisible(false);
-
-        super.addSideMenu(res);
-
-        tb.addSearchCommand(e -> {
-        });
-        
-        Image img = res.getImage("profile-background.jpg");
-        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
-            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
-        }
-        ScaleImageLabel sl = new ScaleImageLabel(img);
-        sl.setUIID("BottomPad");
-        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-        int nb = ServiceAbonnement.getInstance().getAllabonnements().size();
-        Label NB = new Label(nb+"  Réclamations");
-        
-        //Label facebook = new Label("786 followers", FontImage.MATERIAL_DELETE, "BottomPad");
-        Label twitter = new Label("486 followers", res.getImage("twitter-logo.png"), "BottomPad");
-        NB.setTextPosition(BOTTOM);
-        twitter.setTextPosition(BOTTOM);
-
-        add(LayeredLayout.encloseIn(
-                sl,
-                BorderLayout.south(
-                        GridLayout.encloseIn(3,
-                                NB,
-                                FlowLayout.encloseCenter(
-                                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond")),
-                                twitter
-                        )
-                )
-        ));
-        
-        
-    int[] colors = new int[]{ColorUtil.BLUE, ColorUtil.rgb(10,163,79),ColorUtil.rgb(247,28,5), ColorUtil.rgb(243,137,29)};
+    public Form CreateForm(){
+        int[] colors = new int[]{ColorUtil.BLUE, ColorUtil.rgb(10,163,79),ColorUtil.rgb(247,28,5), ColorUtil.rgb(243,137,29)};
     DefaultRenderer renderer = buildCategoryRenderer(colors);
     renderer.setChartTitleTextSize(20);
     renderer.setDisplayValues(true);
@@ -130,6 +94,87 @@ private DefaultRenderer buildCategoryRenderer(int[] colors) {
 
     // Wrap the chart in a Component so we can add it to a form
     ChartComponent c = new ChartComponent(chart);
-        add(c);
+    
+    Form f = new Form("Statistique Calorique", new BorderLayout());
+        f.add(BorderLayout.CENTER, c);
+        
+        return f;
+    }
+    
+    
+    public Statistique(Resources res) {
+//        super(BoxLayout.y());
+//        Toolbar tb = new Toolbar(true);
+//        setToolbar(tb);
+//        
+//        getTitleArea().setUIID("SignIn");
+//      
+//        //setUIID("");
+//
+//        setTitle("Liste Des Réclamations");
+//        getContentPane().setScrollVisible(false);
+//        
+//        super.addSideMenu(res);
+//
+//        tb.addSearchCommand(e -> {
+//        });
+//        
+//        Image img = res.getImage("profile-background.jpg");
+//        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+//            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+//        }
+//        ScaleImageLabel sl = new ScaleImageLabel(img);
+//        sl.setUIID("BottomPad");
+//        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+//        int nb = ServiceAbonnement.getInstance().getAllabonnements().size();
+//        Label NB = new Label(nb+"  Réclamations");
+//        
+//        //Label facebook = new Label("786 followers", FontImage.MATERIAL_DELETE, "BottomPad");
+//        Label twitter = new Label("486 followers", res.getImage("twitter-logo.png"), "BottomPad");
+//        NB.setTextPosition(BOTTOM);
+//        twitter.setTextPosition(BOTTOM);
+//
+//        add(LayeredLayout.encloseIn(
+//                sl,
+//                BorderLayout.south(
+//                        GridLayout.encloseIn(3,
+//                                NB,
+//                                FlowLayout.encloseCenter(
+//                                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond")),
+//                                twitter
+//                        )
+//                )
+//        ));
+//     t = CreateForm();
+//     
+//        add(t);
+super("Nos Menus", BoxLayout.y());
+        Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        setTitle("Statistique");
+        getContentPane().setScrollVisible(false);
+        
+        super.addSideMenu(res);
+        
+        Image img = res.getImage("profile-background.jpg");
+        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 16) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 16);
+        }
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        
+        add(LayeredLayout.encloseIn(
+                sl
+        ));
+        
+        /****************************/
+        Label tit = new Label("Statistique: Nombre de réclamation");
+        Label tit1 = new Label("par rapport au type");
+        tit.setUIID("TextFieldBlack");
+        tit1.setUIID("TextFieldBlack");
+        t = CreateForm();
+        addAll(tit,tit1,t);
+      
 }
 }
