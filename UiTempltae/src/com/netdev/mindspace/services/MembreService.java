@@ -244,5 +244,14 @@ public class MembreService {
          return json;
     }
     
+     public void updatePassword(int cin, String password) {
+        String url = Statics.BASE_URL + "/membre/UpdatePasswordMobile/" + cin + "/" + password ;
+        System.out.print(url);
+        ConnectionRequest req = new ConnectionRequest();
+        req.setUrl(url);
+
+        NetworkManager.getInstance().addToQueueAndWait(req);
+
+    }
 }
 
