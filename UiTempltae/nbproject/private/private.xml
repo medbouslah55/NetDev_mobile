@@ -4,22 +4,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/netdev/mindspace/services/MembreService.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/codename1/uikit/cleanmodern/ActivateForm.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/codename1/uikit/cleanmodern/SignInForm.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/codename1/uikit/cleanmodern/SignUpForm.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/codename1/uikit/cleanmodern/CleanModern.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/netdev/mindspace/utils/Session.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/netdev/mindspace/entites/Membre.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/codename1/uikit/cleanmodern/ProfileForm.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/netdev/mindspace/entites/Admin.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/codename1/uikit/cleanmodern/EditProfileForm.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/build.xml</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/codename1/uikit/cleanmodern/BaseForm.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/codename1/uikit/cleanmodern/WalkthruForm.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/netdev/mindspace/entites/User.java</file>
-            <file>file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/src/com/codename1/uikit/cleanmodern/NewsfeedForm.java</file>
-            <file>jar:file:/Users/mohamedbouslah/Desktop/mobile/Pidev/UiTempltae/lib/CodenameOne_SRC.zip!/com/codename1/ui/util/Resources.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/codename1/uikit/cleanmodern/BaseForm.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/codename1/uikit/cleanmodern/ActivateForm.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/gui/AfficherMenuSoloSearch.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/mindspace/gui/cyrine/ShowAct.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/mindspace/gui/cyrine/ListCentre.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/gui/SettingsForm.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/gui/MapForm.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/gui/AfficherListRegime.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/gui/SearchMenuForm.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/gui/PieChart.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/gui/AfficherMenuSolo.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/gui/AfficherListeMenus.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/mindspace/gui/mehdi/AfficherListeStatus.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/codename1/uikit/cleanmodern/SignInForm.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/mindspace/gui/cyrine/showCentreInfo.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/services/RegimeServices.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/services/EvenementServices.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/codename1/uikit/cleanmodern/CleanModern.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/mindspace/gui/cyrine/ListActivite.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/services/MembreService.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/utils/Statics.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/codename1/uikit/cleanmodern/MotDePasseOubliee.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/netdev/mindspace/services/MenuServices.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/codename1/uikit/cleanmodern/WalkthruForm.java</file>
+            <file>file:/Users/mohamedbouslah/Downloads/UiTempltae/src/com/mindspace/gui/mehdi/AfficherListeEvenement.java</file>
         </group>
     </open-files>
 </project-private>
