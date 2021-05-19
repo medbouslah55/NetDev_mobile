@@ -118,7 +118,7 @@ public class ServiceReclamation {
                 
                 String sDate1 = obj.get("date").toString();
                 String Date2 =sDate1.substring(0, 10);
-                System.out.println(Date2);
+                
                 //2021-04-04T00:00:00+00:00//format date mta3i ena 
                 t.setDate_rec(new SimpleDateFormat("yyyy-MM-dd").parse(Date2));
                 t.setDescription_rec(obj.get("description").toString());
